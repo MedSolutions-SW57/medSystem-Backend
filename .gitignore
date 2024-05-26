@@ -1,6 +1,7 @@
- ## README.md
+README.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -31,3 +32,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Extra ###
+mvnw
+mvnw.cmd
