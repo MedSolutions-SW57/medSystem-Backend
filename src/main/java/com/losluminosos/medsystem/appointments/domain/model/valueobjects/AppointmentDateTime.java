@@ -4,8 +4,8 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public record AppointmentDateTime(
-        String date,
-        String time
+        String appointmentDate,
+        String appointmentTime
 ){
     public AppointmentDateTime() {
         this(null, null);
@@ -13,14 +13,14 @@ public record AppointmentDateTime(
 
 
     public String getDateTime(){
-        return String.format("%s %s", date, time);
+        return String.format("%s %s", appointmentDate, appointmentTime);
     }
 
     public AppointmentDateTime {
-        if (date == null || date.isBlank()) {
+        if (appointmentDate == null || appointmentDate.isBlank()) {
             throw new IllegalArgumentException("Date cannot be null or empty");
         }
-        if (time == null || time.isBlank()) {
+        if (appointmentTime == null || appointmentTime.isBlank()) {
             throw new IllegalArgumentException("Time cannot be null or empty");
         }
     }
