@@ -1,5 +1,7 @@
 package com.losluminosos.medsystem.appointments.interfaces.rest;
 
+import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByDoctorIdQuery;
+import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByPatientIdQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsQuery;
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentCommandService;
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentQueryService;
@@ -36,6 +38,24 @@ public class AppointmentsController {
         return new ResponseEntity<>(appointmentResource, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{patientId}")
+    public ResponseEntity<AppointmentResource> getAppointmentByPatientId(@PathVariable Long patientId) {
+        var getAppointmentByPatientIdQuery = new GetAllAppointmentsByPatientIdQuery(patientId);
+        var appointment = appointmentQueryService.handle(getAppointmentByPatientIdQuery);
+        if (appointment.isEmpty()) return ResponseEntity.badRequest().build();
+        var appointmentResource = AppointmentResourceFromEntityAssembler.toResourceFromEntity(appointment.get());
+        return ResponseEntity.ok(appointmentResource);
+
+    }
+    @GetMapping("/{doctorId}")
+    public ResponseEntity<AppointmentResource> getAppointmentByDoctorId(@PathVariable Long doctorId) {
+        var getAppointmentByDoctorIdQuery = new GetAllAppointmentsByDoctorIdQuery(doctorId);
+        var appointment = appointmentQueryService.handle(getAppointmentByDoctorIdQuery);
+        if (appointment.isEmpty()) return ResponseEntity.badRequest().build();
+        var appointmentResource = AppointmentResourceFromEntityAssembler.toResourceFromEntity(appointment.get());
+        return ResponseEntity.ok(appointmentResource);
+    }
+
     @GetMapping
     public ResponseEntity<List<AppointmentResource>> getAllAppointments(){
         var getAllAppointmentsQuery = new GetAllAppointmentsQuery();
@@ -45,4 +65,5 @@ public class AppointmentsController {
                 .toList();
         return ResponseEntity.ok(appointmentResources);
     }
+
 }
