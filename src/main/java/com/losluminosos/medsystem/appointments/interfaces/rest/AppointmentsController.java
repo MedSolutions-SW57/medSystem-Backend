@@ -7,6 +7,7 @@ import com.losluminosos.medsystem.appointments.domain.services.AppointmentComman
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentQueryService;
 import com.losluminosos.medsystem.appointments.interfaces.rest.resources.AppointmentResource;
 import com.losluminosos.medsystem.appointments.interfaces.rest.resources.CreateAppointmentResource;
+import com.losluminosos.medsystem.appointments.interfaces.rest.resources.UpdateAppointmentReasonResource;
 import com.losluminosos.medsystem.appointments.interfaces.rest.transform.AppointmentResourceFromEntityAssembler;
 import com.losluminosos.medsystem.appointments.interfaces.rest.transform.CreateAppointmentCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -65,5 +66,15 @@ public class AppointmentsController {
                 .toList();
         return ResponseEntity.ok(appointmentResources);
     }
+    /*
+    @PutMapping ResponseEntity<AppointmentResource> updateAppointmentReason(@RequestBody UpdateAppointmentReasonResource resource) {
+        var updateAppointmentReasonCommand = CreateAppointmentCommandFromResourceAssembler.toCommandFromResource(resource);
+        var appointment = appointmentCommandService.handle(createAppointmentCommand);
+        if (appointment.isEmpty()) return ResponseEntity.badRequest().build();
+        var appointmentResource = AppointmentResourceFromEntityAssembler.toResourceFromEntity(appointment.get());
+        return ResponseEntity.ok(appointmentResource);
+    }
+
+     */
 
 }
