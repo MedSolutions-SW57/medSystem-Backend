@@ -2,6 +2,7 @@ package com.losluminosos.medsystem.appointments.application.internal.commandserv
 
 import com.losluminosos.medsystem.appointments.domain.model.aggregates.Appointment;
 import com.losluminosos.medsystem.appointments.domain.model.commands.CreateAppointmentCommand;
+import com.losluminosos.medsystem.appointments.domain.model.commands.DeleteAppointmentCommand;
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentCommandService;
 import com.losluminosos.medsystem.appointments.infrastructure.persistance.jpa.repositories.AppointmentRepository;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,11 @@ public class AppointmentCommandServiceImpl implements AppointmentCommandService 
         appointmentRepository.save(appointment);
         return Optional.of(appointment);
     }
+
+    @Override
+    public void handle(DeleteAppointmentCommand command) {
+        var appointment = appointmentRepository.findById(command.Id());
+        appointment.ifPresent(appointmentRepository::delete);
+    }
+
 }

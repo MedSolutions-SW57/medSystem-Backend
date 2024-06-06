@@ -7,9 +7,11 @@ import com.losluminosos.medsystem.appointments.domain.services.AppointmentComman
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentQueryService;
 import com.losluminosos.medsystem.appointments.interfaces.rest.resources.AppointmentResource;
 import com.losluminosos.medsystem.appointments.interfaces.rest.resources.CreateAppointmentResource;
+import com.losluminosos.medsystem.appointments.interfaces.rest.resources.DeleteAppointmentResource;
 import com.losluminosos.medsystem.appointments.interfaces.rest.resources.UpdateAppointmentReasonResource;
 import com.losluminosos.medsystem.appointments.interfaces.rest.transform.AppointmentResourceFromEntityAssembler;
 import com.losluminosos.medsystem.appointments.interfaces.rest.transform.CreateAppointmentCommandFromResourceAssembler;
+import com.losluminosos.medsystem.appointments.interfaces.rest.transform.DeleteAppointmentCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -76,5 +78,11 @@ public class AppointmentsController {
     }
 
      */
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAppointment(@PathVariable Long id) {
+        var deleteAppointmentResource = new DeleteAppointmentResource(id);
+        var deleteAppointmentCommand = DeleteAppointmentCommandFromResourceAssembler.toCommandFromResource(deleteAppointmentResource);
+        appointmentCommandService.handle(deleteAppointmentCommand);
+        return ResponseEntity.noContent().build();
+    }
 }
