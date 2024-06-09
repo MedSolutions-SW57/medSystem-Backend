@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TreatmentRepository extends JpaRepository<Treatment, Long> {
-    boolean existsByTreatmentName(String treatmentName);
+    boolean existsByTreatmentNameAndPatientId(String treatmentName, String patientId);
 }
