@@ -6,9 +6,10 @@ import com.losluminosos.medsystem.appointments.interfaces.rest.resources.Appoint
 public class AppointmentResourceFromEntityAssembler {
     public static AppointmentResource toResourceFromEntity(Appointment appointment) {
         return new AppointmentResource(
+                appointment.getId(),
                 appointment.getDoctorId(),
                 appointment.getPatientId(),
                 appointment.getReason(),
-                appointment.getAppointmentDateTime());
+                appointment.getAppointmentTimePoint());
     }
 }

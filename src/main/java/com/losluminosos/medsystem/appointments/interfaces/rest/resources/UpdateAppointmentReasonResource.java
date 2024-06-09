@@ -1,4 +1,4 @@
 package com.losluminosos.medsystem.appointments.interfaces.rest.resources;
 
-public record UpdateAppointmentReasonResource(String Reason) {
+public record UpdateAppointmentReasonResource(String reason) {
 }
