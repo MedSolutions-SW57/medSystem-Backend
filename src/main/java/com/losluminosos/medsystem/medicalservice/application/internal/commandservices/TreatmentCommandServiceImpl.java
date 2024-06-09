@@ -4,7 +4,7 @@ import com.losluminosos.medsystem.medicalservice.domain.model.aggregates.Treatme
 import com.losluminosos.medsystem.medicalservice.domain.model.commands.CreateTreatmentCommand;
 import com.losluminosos.medsystem.medicalservice.domain.model.commands.DeleteTreatmentCommand;
 import com.losluminosos.medsystem.medicalservice.domain.services.TreatmentCommandService;
-import com.losluminosos.medsystem.medicalservice.infrastructure.persistance.jpa.repositories.TreatmentRepository;
+import com.losluminosos.medsystem.medicalservice.infrastructure.persistence.jpa.repositories.TreatmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class TreatmentCommandServiceImpl implements TreatmentCommandService {
 
     @Override
     public Optional<Treatment> handle(CreateTreatmentCommand command) {
-        if (treatmentRepository.existsByTreatmentName(command.treatmentName()))
+        if (treatmentRepository.existsByTreatmentNameAndPatientId(command.treatmentName(), command.patientId()))
             throw new IllegalArgumentException("Treatment " + command.treatmentName() + " already exists.");
         var treatment = new Treatment(command);
         treatmentRepository.save(treatment);

@@ -4,7 +4,7 @@ import com.losluminosos.medsystem.medicalservice.domain.model.aggregates.Treatme
 import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetAllTreatmentsQuery;
 import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetTreatmentByPatientIdQuery;
 import com.losluminosos.medsystem.medicalservice.domain.services.TreatmentQueryService;
-import com.losluminosos.medsystem.medicalservice.infrastructure.persistance.jpa.repositories.TreatmentRepository;
+import com.losluminosos.medsystem.medicalservice.infrastructure.persistence.jpa.repositories.TreatmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
