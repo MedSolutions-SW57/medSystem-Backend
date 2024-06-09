@@ -18,7 +18,7 @@ public class ReportCommandServiceImpl implements ReportCommandService {
 
     @Override
     public Optional<Report> handle(CreateReportCommand command) {
-        if (reportRepository.existsByDateAndReason(command.date(), command.reason())){
+        if (reportRepository.existsByDateAndReasonAndPatientId(command.date(), command.reason(), command.patientId())){
             throw new IllegalArgumentException("Report already exists");
         }
         var report = new Report(command);

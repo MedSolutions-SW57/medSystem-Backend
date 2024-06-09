@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
-    boolean existsByDateAndReason(String date, String reason);
+    boolean existsByDateAndReasonAndPatientId(String date, String reason, String patientId);
     List<Report> findAllReportsByPatientId(String patientId);
-    List<Report> findAllReports();
 }
