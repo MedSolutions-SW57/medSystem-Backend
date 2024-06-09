@@ -8,8 +8,9 @@ public class CreateAppointmentCommandFromResourceAssembler {
         return new CreateAppointmentCommand(
                 resource.doctorId(),
                 resource.patientId(),
+                resource.reason(),
                 resource.date(),
-                resource.time(),
-                resource.reason());
+                resource.time()
+                );
     }
 }
