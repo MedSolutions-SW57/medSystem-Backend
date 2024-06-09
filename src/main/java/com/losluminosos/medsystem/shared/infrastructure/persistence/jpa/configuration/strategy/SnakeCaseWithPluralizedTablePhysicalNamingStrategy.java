@@ -49,3 +49,4 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
         return Identifier.toIdentifier(newName);
     }
 }
+
