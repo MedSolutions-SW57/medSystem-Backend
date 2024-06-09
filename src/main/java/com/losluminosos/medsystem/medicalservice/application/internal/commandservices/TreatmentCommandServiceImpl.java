@@ -20,7 +20,7 @@ public class TreatmentCommandServiceImpl implements TreatmentCommandService {
 
     @Override
     public Optional<Treatment> handle(CreateTreatmentCommand command) {
-        if (treatmentRepository.existsByTreatmentName(command.treatmentName()))
+        if (treatmentRepository.existsByTreatmentNameAndPatientId(command.treatmentName(), command.patientId()))
             throw new IllegalArgumentException("Treatment " + command.treatmentName() + " already exists.");
         var treatment = new Treatment(command);
         treatmentRepository.save(treatment);
