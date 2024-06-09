@@ -5,7 +5,7 @@ import com.losluminosos.medsystem.shared.domain.model.aggregates.AuditableAbstra
 import jakarta.persistence.*;
 
 @Entity
-public class RequestResult extends AuditableAbstractAggregateRoot<RequestResult> {
+public class Result extends AuditableAbstractAggregateRoot<Result> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class RequestResult extends AuditableAbstractAggregateRoot<RequestResult>
     @Column(name = "result", nullable = false)
     private boolean result;
 
-    public RequestResult(String doctorId, String patientId, String typeOfExam, String requestResultDateTime, boolean result) {
+    public Result(String doctorId, String patientId, String typeOfExam, String requestResultDateTime, boolean result) {
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.typeOfExam = typeOfExam;
@@ -34,7 +34,7 @@ public class RequestResult extends AuditableAbstractAggregateRoot<RequestResult>
         this.result = result;
     }
 
-    public RequestResult() {
+    public Result() {
     }
 
     // Getters y setters
