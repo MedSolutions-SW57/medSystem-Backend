@@ -1,9 +1,10 @@
 package com.losluminosos.medsystem.appointments.interfaces.rest.resources;
 
+import java.util.Date;
+
 public record CreateAppointmentResource(
-        String doctorId,
-        String patientId,
-        String reason,
-        String date,
-        String time
+        Long doctorId,
+        Long patientId,
+        Date date,
+        String reason
 ){ }

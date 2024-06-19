@@ -4,7 +4,6 @@ import com.losluminosos.medsystem.appointments.domain.model.aggregates.Appointme
 import com.losluminosos.medsystem.appointments.domain.model.commands.CreateAppointmentCommand;
 import com.losluminosos.medsystem.appointments.domain.model.commands.DeleteAppointmentCommand;
 import com.losluminosos.medsystem.appointments.domain.model.commands.UpdateAppointmentReasonCommand;
-import com.losluminosos.medsystem.appointments.domain.model.valueobjects.AppointmentTimePoint;
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentCommandService;
 import com.losluminosos.medsystem.appointments.infrastructure.persistance.jpa.repositories.AppointmentRepository;
 import org.springframework.stereotype.Service;
@@ -21,9 +20,8 @@ public class AppointmentCommandServiceImpl implements AppointmentCommandService 
 
     @Override
     public Optional<Appointment> handle(CreateAppointmentCommand command) {
-        var appointmentTimePoint = new AppointmentTimePoint(command.date(), command.time());
-        if(appointmentRepository.existsByAppointmentTimePoint(appointmentTimePoint)) {
-            throw new IllegalArgumentException("Appointment with date and time " + command.date() + "=>" + command.time() + " already exists");
+        if(appointmentRepository.existsByDate(command.date())) {
+            throw new IllegalArgumentException("Appointment in date " + command.date() + " already exists");
         }
         var appointment = new Appointment(command);
         appointmentRepository.save(appointment);
