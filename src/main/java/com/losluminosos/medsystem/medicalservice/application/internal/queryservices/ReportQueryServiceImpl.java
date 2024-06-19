@@ -5,7 +5,7 @@ import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetAllRepo
 import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetReportByIdQuery;
 import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetReportsByPatientIdQuery;
 import com.losluminosos.medsystem.medicalservice.domain.services.ReportQueryService;
-import com.losluminosos.medsystem.medicalservice.infrastructure.persistance.jpa.repositories.ReportRepository;
+import com.losluminosos.medsystem.medicalservice.infrastructure.persistence.jpa.repositories.ReportRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

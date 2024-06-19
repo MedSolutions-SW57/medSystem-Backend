@@ -1,10 +1,10 @@
 package com.losluminosos.medsystem.medicalservice.interfaces.rest.resources;
 
-public record RequestResultResource(
+public record ResultResource(
         String idResult,
         String doctorId,
         String patientId,
         String typeOfExam,
-        String requestResultDateTime,
+        String ResultDateTime,
         boolean result
 ) { }

@@ -3,7 +3,7 @@ package com.losluminosos.medsystem.medicalservice.application.internal.commandse
 import com.losluminosos.medsystem.medicalservice.domain.model.commands.CreateReportCommand;
 import com.losluminosos.medsystem.medicalservice.domain.model.entities.Report;
 import com.losluminosos.medsystem.medicalservice.domain.services.ReportCommandService;
-import com.losluminosos.medsystem.medicalservice.infrastructure.persistance.jpa.repositories.ReportRepository;
+import com.losluminosos.medsystem.medicalservice.infrastructure.persistence.jpa.repositories.ReportRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
