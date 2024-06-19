@@ -49,24 +49,24 @@ public class AppointmentsController {
                 .toList();
         return ResponseEntity.ok(appointmentResources);
     }
-    @GetMapping("/{patientId}")
-    public ResponseEntity<AppointmentResource> getAppointmentByPatientId(@PathVariable Long patientId) {
-        var getAppointmentByPatientIdQuery = new GetAllAppointmentsByPatientIdQuery(patientId);
-        var appointment = appointmentQueryService.handle(getAppointmentByPatientIdQuery);
-        if (appointment.isEmpty()) return ResponseEntity.badRequest().build();
-        var appointmentResource = AppointmentResourceFromEntityAssembler.toResourceFromEntity(appointment.get());
-        return ResponseEntity.ok(appointmentResource);
-
+    @GetMapping("/patientId/{patientId}")
+    public ResponseEntity<List<AppointmentResource>> getAllAppointmentByPatientId(@PathVariable Long patientId) {
+        var getAllAppointmentsByPatientIdQuery = new GetAllAppointmentsByPatientIdQuery(patientId);
+        var appointments = appointmentQueryService.handle(getAllAppointmentsByPatientIdQuery);
+        var appointmentsResources = appointments.stream()
+                .map(AppointmentResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(appointmentsResources);
     }
-    @GetMapping("/{doctorId}")
-    public ResponseEntity<AppointmentResource> getAppointmentByDoctorId(@PathVariable Long doctorId) {
-        var getAppointmentByDoctorIdQuery = new GetAllAppointmentsByDoctorIdQuery(doctorId);
-        var appointment = appointmentQueryService.handle(getAppointmentByDoctorIdQuery);
-        if (appointment.isEmpty()) return ResponseEntity.badRequest().build();
-        var appointmentResource = AppointmentResourceFromEntityAssembler.toResourceFromEntity(appointment.get());
-        return ResponseEntity.ok(appointmentResource);
+    @GetMapping("/doctorId/{doctorId}")
+    public ResponseEntity<List<AppointmentResource>> getAllAppointmentByDoctorId(@PathVariable Long doctorId) {
+        var getAllAppointmentsByDoctorQuery = new GetAllAppointmentsByDoctorIdQuery(doctorId);
+        var appointments = appointmentQueryService.handle(getAllAppointmentsByDoctorQuery);
+        var appointmentsResources = appointments.stream()
+                .map(AppointmentResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(appointmentsResources);
     }
-
 
     @PutMapping ("/{appointmentId}")
     public ResponseEntity<AppointmentResource> updateAppointmentReason(@PathVariable Long appointmentId, @RequestBody UpdateAppointmentReasonResource updateAppointmentReasonResource) {

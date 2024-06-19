@@ -1,4 +1,6 @@
 package com.losluminosos.medsystem.appointments.domain.model.commands;
 
-public record CreateAppointmentCommand(String doctorId, String patientId, String reason, String date, String time) {
+import java.util.Date;
+
+public record CreateAppointmentCommand(Long doctorId, Long patientId, Date date, String reason) {
 }
