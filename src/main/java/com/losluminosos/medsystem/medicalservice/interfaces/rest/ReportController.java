@@ -50,7 +50,7 @@ public class ReportController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("patient/{patientId}")
+    @GetMapping("patientId/{patientId}")
     public ResponseEntity<List<ReportResource>> getAllReportsByPatientId(@PathVariable String patientId) {
         var getReportsByPatientIdQuery = new GetReportsByPatientIdQuery(patientId);
         List<Report> reports = reportQueryService.handle(getReportsByPatientIdQuery);
