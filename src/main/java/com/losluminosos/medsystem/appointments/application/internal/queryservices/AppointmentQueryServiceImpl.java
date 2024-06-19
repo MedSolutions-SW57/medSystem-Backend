@@ -1,7 +1,6 @@
 package com.losluminosos.medsystem.appointments.application.internal.queryservices;
 
 import com.losluminosos.medsystem.appointments.domain.model.aggregates.Appointment;
-import com.losluminosos.medsystem.appointments.domain.model.queries.GetAppointmentByDateQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByDoctorIdQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByPatientIdQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsQuery;
@@ -30,10 +29,6 @@ public class AppointmentQueryServiceImpl implements AppointmentQueryService{
         return appointmentRepository.findAllByDoctorId(query.doctorId());
     }
 
-    @Override
-    public Optional<Appointment> handle(GetAppointmentByDateQuery query) {
-        return appointmentRepository.findByDate(query.date());
-    }
 
     @Override
     public List<Appointment> handle(GetAllAppointmentsQuery query){
