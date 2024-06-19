@@ -12,6 +12,5 @@ import java.util.Optional;
 public interface AppointmentQueryService {
     List<Appointment> handle(GetAllAppointmentsByDoctorIdQuery query);
     List<Appointment> handle(GetAllAppointmentsByPatientIdQuery query);
-    //Optional<Appointment> handle(GetAppointmentByDateQuery query);
     List<Appointment> handle(GetAllAppointmentsQuery query);
 }
