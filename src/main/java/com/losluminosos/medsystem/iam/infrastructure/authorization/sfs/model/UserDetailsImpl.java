@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -21,12 +22,12 @@ public class UserDetailsImpl implements UserDetails {
     private final boolean accountNonLocked;
     private final boolean credentialsNonExpired;
     private final boolean enabled;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private final GrantedAuthority authority;
 
-    public UserDetailsImpl(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(String username, String password, GrantedAuthority authority) {
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
+        this.authority = authority;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
@@ -34,11 +35,12 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-        var authorities = user.getRoles().stream()
-                .map(role -> role.getName().name())
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authorities);
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getStringName());
+        return new UserDetailsImpl(user.getUsername(), user.getPassword(), authority);
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 }
