@@ -12,11 +12,11 @@ import java.sql.Timestamp;
 
 
 @Service
-public class ApplicationReadyEventHandler {
-    private final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventHandler.class);
+public class ApplicationReadyEventHandlerAnalysisStatus {
+    private final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventHandlerAnalysisStatus.class);
     private final AnalysisStatusCommandService analysisStatusCommandService;
 
-    public ApplicationReadyEventHandler(AnalysisStatusCommandService analysisStatusCommandService) {
+    public ApplicationReadyEventHandlerAnalysisStatus(AnalysisStatusCommandService analysisStatusCommandService) {
         this.analysisStatusCommandService = analysisStatusCommandService;
     }
 
@@ -27,9 +27,9 @@ public class ApplicationReadyEventHandler {
     @EventListener
     public void on(ApplicationReadyEvent event){
         var applicationName = event.getApplicationContext().getId();
-        LOGGER.info("Starting to verify if analysis status seeding is needed for {} at {}", applicationName, getCurrentTimestamp());
+        LOGGER.info("Starting to verify if analysis statusId seeding is needed for {} at {}", applicationName, getCurrentTimestamp());
         var seedAnalysisStatusCommand = new SeedAnalysisStatusCommand();
         analysisStatusCommandService.handle(seedAnalysisStatusCommand);
-        LOGGER.info("Analysis status seeding verification finished for {} at {}", applicationName, getCurrentTimestamp());
+        LOGGER.info("Analysis statusId seeding verification finished for {} at {}", applicationName, getCurrentTimestamp());
     }
 }
