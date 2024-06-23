@@ -3,6 +3,7 @@ package com.losluminosos.medsystem.laboratoryservice.application.internal.comman
 import com.losluminosos.medsystem.laboratoryservice.domain.model.aggregates.Analysis;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.commands.CreateAnalysisCommand;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.commands.UpdateAnalysisCommand;
+import com.losluminosos.medsystem.laboratoryservice.domain.model.entities.AnalysisStatus;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.AnalysisCommandService;
 import com.losluminosos.medsystem.laboratoryservice.infrastructure.persistence.jpa.repositories.AnalysisRepository;
 import com.losluminosos.medsystem.laboratoryservice.infrastructure.persistence.jpa.repositories.AnalysisStatusRepository;
@@ -25,7 +26,11 @@ public class AnalysisCommandServiceImpl implements AnalysisCommandService {
         if (analysisRepository.existsBySampleId(command.SampleId())) {
             throw new IllegalArgumentException("Analysis with sample id " + command.SampleId() + " already exists");
         }
-        var analysis = new Analysis(command.AnalysisType(), command.SampleId(), command.PatientDni(), command.Date(), analysisStatusRepository.findById(command.Status()).get());
+        Optional<AnalysisStatus> analysisStatusOptional = analysisStatusRepository.findById(command.Status());
+        if (analysisStatusOptional.isEmpty()) {
+            throw new IllegalArgumentException("No AnalysisStatus found with id " + command.Status());
+        }
+        var analysis = new Analysis(command.AnalysisType(), command.SampleId(), command.PatientDni(), command.Date(), analysisStatusOptional.get());
         analysisRepository.save(analysis);
         return Optional.of(analysis);
     }
