@@ -1,4 +1,6 @@
 package com.losluminosos.medsystem.laboratoryservice.domain.model.commands;
 
-public record UpdateAnalysisCommand(String status) {
+import com.losluminosos.medsystem.laboratoryservice.domain.model.entities.AnalysisStatus;
+
+public record UpdateAnalysisCommand(Long analysisId, AnalysisStatus status) {
 }

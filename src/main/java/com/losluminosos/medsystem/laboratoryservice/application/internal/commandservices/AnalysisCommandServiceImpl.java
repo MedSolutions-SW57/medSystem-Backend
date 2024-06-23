@@ -32,6 +32,14 @@ public class AnalysisCommandServiceImpl implements AnalysisCommandService {
 
     @Override
     public Optional<Analysis> handle(UpdateAnalysisCommand command) {
-        return Optional.empty();
+        var result = analysisRepository.findById(command.analysisId());
+        if(result.isEmpty()) throw new IllegalArgumentException("Analysis does not exist");
+        var analysisToUpdate = result.get();
+        try {
+            var updatedAnalysis = analysisRepository.save(analysisToUpdate.updateStatus(command.status()));
+            return Optional.of(updatedAnalysis);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error while updating analysis: " + e.getMessage());
+        }
     }
 }
