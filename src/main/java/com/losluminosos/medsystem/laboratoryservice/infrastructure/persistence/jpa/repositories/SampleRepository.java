@@ -4,8 +4,12 @@ import com.losluminosos.medsystem.laboratoryservice.domain.model.aggregates.Samp
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface SampleRepository extends JpaRepository<Sample, Long> {
-    boolean existsByPatientDni(String patientDni);
-    boolean existsByDoctorId(Long doctorId);
+    boolean existsByCode(String code);
+    Optional<Sample> findSampleByCode(String code);
+    List<Sample> findAllSamplesByPatientDni(String patientDni);
 }
