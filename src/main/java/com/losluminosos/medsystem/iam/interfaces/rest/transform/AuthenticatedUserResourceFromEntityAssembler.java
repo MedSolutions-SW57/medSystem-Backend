@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.iam.interfaces.rest.resources.AuthenticatedUse
 
 public class AuthenticatedUserResourceFromEntityAssembler {
     public static AuthenticatedUserResource toResourceFromEntity(User user, String token) {
-        return new AuthenticatedUserResource(user.getId(), user.getUsername(), token);
+        return new AuthenticatedUserResource(user.getId(), user.getUsername(), token, user.getRole().getStringName());
     }
 }

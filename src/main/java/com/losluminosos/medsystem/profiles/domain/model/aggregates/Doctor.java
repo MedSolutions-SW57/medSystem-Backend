@@ -15,8 +15,8 @@ public class Doctor extends AuditableAbstractAggregateRoot<Doctor> {
 
     private String specialty;
 
-    @Max(7)
-    private Long licenseNumber;
+    @Size(max = 7)
+    private String licenseNumber;
 
     private Long userId;
 
