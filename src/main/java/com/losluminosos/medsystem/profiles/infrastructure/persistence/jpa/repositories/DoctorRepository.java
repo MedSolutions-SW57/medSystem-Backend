@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.profiles.domain.model.valueobjects.EmailAddres
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    boolean existsByLicenseNumber(Long licenceNumber);
+    boolean existsByLicenseNumber(String licenceNumber);
     boolean existsByEmail(EmailAddress emailAddress);
 }

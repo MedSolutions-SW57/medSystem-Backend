@@ -20,10 +20,6 @@ public class DoctorCommandServiceImpl implements DoctorCommandService {
     @Override
     public Optional<Doctor> handle(CreateDoctorCommand command) {
         var emailAddress = new EmailAddress(command.email());
-        if(doctorRepository.existsByEmail(emailAddress))
-            throw new IllegalArgumentException("Account with this email already exists.");
-        if(doctorRepository.existsByLicenseNumber(command.licenceNumber()))
-            throw  new IllegalArgumentException("Account with this licence number already exists.");
         var doctor = new Doctor(command);
         doctorRepository.save(doctor);
         return Optional.of(doctor);

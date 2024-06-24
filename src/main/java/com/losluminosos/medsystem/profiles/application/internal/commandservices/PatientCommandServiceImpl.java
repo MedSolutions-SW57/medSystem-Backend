@@ -19,9 +19,6 @@ public class PatientCommandServiceImpl implements PatientCommandService {
 
     @Override
     public Optional<Patient> handle(CreatePatientCommand command) {
-        var emailAddress = new EmailAddress(command.email());
-        if(patientRepository.existsByEmail(emailAddress))
-            throw new IllegalArgumentException("Account with this email already exists.");
         var patient = new Patient(command);
         patientRepository.save(patient);
         return Optional.of(patient);
