@@ -49,6 +49,6 @@ public class SamplesController {
     public ResponseEntity<?> deleteSample(@PathVariable String code) {
         var deleteSampleCommand = new DeleteSampleCommand(code);
         sampleCommandService.handle(deleteSampleCommand);
-        return ResponseEntity.ok("Code already exists");
+        return ResponseEntity.ok("Code successfully removed");
     }
 }
