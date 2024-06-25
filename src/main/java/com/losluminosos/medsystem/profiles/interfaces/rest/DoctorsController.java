@@ -1,6 +1,7 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetDoctorByIdQuery;
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetDoctorByUserIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.DoctorCommandService;
 import com.losluminosos.medsystem.profiles.domain.services.DoctorQueryService;
 import com.losluminosos.medsystem.profiles.interfaces.rest.resources.CreateDoctorResource;
@@ -39,6 +40,16 @@ public class DoctorsController {
     public ResponseEntity<DoctorResource> getDoctorById(@PathVariable Long id) {
         var getDoctorByIdQuery = new GetDoctorByIdQuery(id);
         var doctor = doctorQueryService.handle(getDoctorByIdQuery);
+        if (doctor.isEmpty())
+            return ResponseEntity.notFound().build();
+        var doctorResource = DoctorResourceFromEntityAssembler.toResourceFromEntity(doctor.get());
+        return ResponseEntity.ok(doctorResource);
+    }
+
+    @GetMapping("userId/{id}")
+    public ResponseEntity<DoctorResource> getDoctorByUserId(@PathVariable Long id) {
+        var getDoctorByUserIdQuery = new GetDoctorByUserIdQuery(id);
+        var doctor = doctorQueryService.handle(getDoctorByUserIdQuery);
         if (doctor.isEmpty())
             return ResponseEntity.notFound().build();
         var doctorResource = DoctorResourceFromEntityAssembler.toResourceFromEntity(doctor.get());

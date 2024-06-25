@@ -1,9 +1,7 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
-import com.losluminosos.medsystem.medicalservice.domain.model.queries.GetTreatmentByPatientIdQuery;
-import com.losluminosos.medsystem.medicalservice.interfaces.rest.resources.TreatmentResource;
-import com.losluminosos.medsystem.medicalservice.interfaces.rest.transform.TreatmentResourceFromEntityAssembler;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetPatientByIdQuery;
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetPatientByUserIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.PatientCommandService;
 import com.losluminosos.medsystem.profiles.domain.services.PatientQueryService;
 import com.losluminosos.medsystem.profiles.interfaces.rest.resources.CreatePatientResource;
@@ -41,6 +39,16 @@ public class PatientsController {
     public ResponseEntity<PatientResource> getPatientById(@PathVariable Long id) {
         var getPatientByIdQuery = new GetPatientByIdQuery(id);
         var patient = patientQueryService.handle(getPatientByIdQuery);
+        if (patient.isEmpty())
+            return ResponseEntity.notFound().build();
+        var patientResource = PatientResourceFromEntityAssembler.toResourceFromEntity(patient.get());
+        return ResponseEntity.ok(patientResource);
+    }
+
+    @GetMapping("userId/{id}")
+    public ResponseEntity<PatientResource> getPatientByUserId(@PathVariable Long id) {
+        var getPatientByUserIdQuery = new GetPatientByUserIdQuery(id);
+        var patient = patientQueryService.handle(getPatientByUserIdQuery);
         if (patient.isEmpty())
             return ResponseEntity.notFound().build();
         var patientResource = PatientResourceFromEntityAssembler.toResourceFromEntity(patient.get());
