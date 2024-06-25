@@ -1,6 +1,8 @@
 package com.losluminosos.medsystem.laboratoryservice.interfaces.rest;
 
+import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesByPatientIdQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesQuery;
+import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetSampleByCodeQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleCommandService;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleQueryService;
 import com.losluminosos.medsystem.laboratoryservice.interfaces.rest.resources.CreateSampleResource;
@@ -40,6 +42,22 @@ public class SamplesController {
     public ResponseEntity<List<SampleResource>> getAllSamples() {
         var getAllSamplesQuery = new GetAllSamplesQuery();
         var samples = sampleQueryService.handle(getAllSamplesQuery);
+        var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(sampleResource);
+    }
+
+    @GetMapping("patientId/{patientId}")
+    public ResponseEntity<List<SampleResource>> getAllSamplesByPatientDni(@PathVariable Long patientId) {
+        var getAllSamplesByPatientDniQuery = new GetAllSamplesByPatientIdQuery(patientId);
+        var samples = sampleQueryService.handle(getAllSamplesByPatientDniQuery);
+        var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(sampleResource);
+    }
+
+    @GetMapping("code/{code}")
+        public ResponseEntity<List<SampleResource>> getSampleByCode(@PathVariable String code) {
+        var getSampleByCodeQuery = new GetSampleByCodeQuery(code);
+        var samples = sampleQueryService.handle(getSampleByCodeQuery);
         var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(sampleResource);
     }

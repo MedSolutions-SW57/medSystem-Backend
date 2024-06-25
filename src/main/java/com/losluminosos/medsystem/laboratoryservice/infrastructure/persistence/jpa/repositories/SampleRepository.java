@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface SampleRepository extends JpaRepository<Sample, Long> {
     boolean existsByCode(String code);
     Optional<Sample> findSampleByCode(String code);
-    List<Sample> findAllSamplesByPatientDni(String patientDni);
+    List<Sample> findAllSamplesByPatientId(Long patientId);
 }

@@ -6,6 +6,6 @@ import com.losluminosos.medsystem.laboratoryservice.interfaces.rest.resources.Sa
 public class SampleResourceFromEntityAssembler {
     public static SampleResource toResourceFromEntity(Sample entity){
         return new SampleResource(entity.getId(),entity.getType(),entity.getCode(),
-                entity.getPatientDni(),entity.getDoctorId(),entity.getDate());
+                entity.getPatientId(),entity.getDoctorId(),entity.getDate());
     }
 }
