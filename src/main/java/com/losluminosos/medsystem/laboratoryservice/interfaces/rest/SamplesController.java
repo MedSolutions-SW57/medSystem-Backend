@@ -1,5 +1,6 @@
 package com.losluminosos.medsystem.laboratoryservice.interfaces.rest;
 
+import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesByPatientDniQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleCommandService;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleQueryService;
@@ -40,6 +41,14 @@ public class SamplesController {
     public ResponseEntity<List<SampleResource>> getAllSamples() {
         var getAllSamplesQuery = new GetAllSamplesQuery();
         var samples = sampleQueryService.handle(getAllSamplesQuery);
+        var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(sampleResource);
+    }
+
+    @GetMapping("/{patientDni}")
+    public ResponseEntity<List<SampleResource>> getAllSamplesByPatientDni(@PathVariable String patientDni) {
+        var getAllSamplesByPatientDniQuery = new GetAllSamplesByPatientDniQuery(patientDni);
+        var samples = sampleQueryService.handle(getAllSamplesByPatientDniQuery);
         var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(sampleResource);
     }
