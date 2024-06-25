@@ -22,11 +22,11 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/api/v1/reports")
 @Tag(name = "Reports", description = "Report Management Endpoints")
-public class ReportController {
+public class ReportsController {
     private final ReportCommandService reportCommandService;
     private final ReportQueryService reportQueryService;
 
-    public ReportController(ReportCommandService reportCommandService, ReportQueryService reportQueryService) {
+    public ReportsController(ReportCommandService reportCommandService, ReportQueryService reportQueryService) {
         this.reportCommandService = reportCommandService;
         this.reportQueryService = reportQueryService;
     }

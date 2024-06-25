@@ -7,10 +7,8 @@ import com.losluminosos.medsystem.profiles.domain.model.valueobjects.StreetAddre
 import com.losluminosos.medsystem.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
-import java.io.Console;
 
 @Entity
 @Getter
@@ -35,7 +33,6 @@ public class Patient extends AuditableAbstractAggregateRoot<Patient> {
             @AttributeOverride(name = "address", column = @Column(name = "email_address"))})
     private EmailAddress email;
 
-    @Size(max = 9)
     private String phone;
 
 
