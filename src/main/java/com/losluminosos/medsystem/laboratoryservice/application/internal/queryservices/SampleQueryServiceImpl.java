@@ -1,7 +1,7 @@
 package com.losluminosos.medsystem.laboratoryservice.application.internal.queryservices;
 
 import com.losluminosos.medsystem.laboratoryservice.domain.model.aggregates.Sample;
-import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesByPatientDniQuery;
+import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesByPatientIdQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetSampleByCodeQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetSampleByIdQuery;
@@ -36,7 +36,7 @@ public class SampleQueryServiceImpl implements SampleQueryService {
     }
 
     @Override
-    public List<Sample> handle(GetAllSamplesByPatientDniQuery query) {
-        return sampleRepository.findAllSamplesByPatientDni(query.patientDni());
+    public List<Sample> handle(GetAllSamplesByPatientIdQuery query) {
+        return sampleRepository.findAllSamplesByPatientId(query.patientId());
     }
 }

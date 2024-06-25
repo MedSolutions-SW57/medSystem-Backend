@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.laboratoryservice.interfaces.rest.resources.Cr
 
 public class CreateSampleCommandFromResourceAssembler {
     public static CreateSampleCommand toCommandFromResource(CreateSampleResource resource) {
-        return new CreateSampleCommand(resource.type(),resource.code(),resource.patientDni(),resource.doctorId(),resource.date());
+        return new CreateSampleCommand(resource.type(),resource.code(),resource.patientId(),resource.doctorId(),resource.date());
     }
 }

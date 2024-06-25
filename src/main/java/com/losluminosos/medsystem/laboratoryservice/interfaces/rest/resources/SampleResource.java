@@ -4,7 +4,7 @@ public record SampleResource(
         Long id,
         String type,
         String code,
-        String patientDni,
+        Long patientId,
         Long doctorId,
         String date
 ) {

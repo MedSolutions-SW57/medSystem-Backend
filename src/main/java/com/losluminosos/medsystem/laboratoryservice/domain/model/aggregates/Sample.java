@@ -17,8 +17,8 @@ public class Sample extends AuditableAbstractAggregateRoot<Sample> {
     @NotBlank(message = "The sample code cannot be empty")
     String code;
 
-    @NotNull(message = "The DNI of patient cannot be empty")
-    String patientDni;
+    @NotNull(message = "The id of patient cannot be empty")
+    Long patientId;
 
     @NotNull(message = "The id of the doctor cannot be empty")
     Long doctorId;
@@ -28,11 +28,11 @@ public class Sample extends AuditableAbstractAggregateRoot<Sample> {
 
     public Sample() {}
 
-    public Sample(String type, String code, String patientDni, Long doctorId, String date) {
+    public Sample(String type, String code, Long patientId, Long doctorId, String date) {
         this();
         this.type = type;
         this.code = code;
-        this.patientDni = patientDni;
+        this.patientId = patientId;
         this.doctorId = doctorId;
         this.date = date;
     }
@@ -41,7 +41,7 @@ public class Sample extends AuditableAbstractAggregateRoot<Sample> {
         this();
         this.type = command.type();
         this.code = command.code();
-        this.patientDni = command.patientDni();
+        this.patientId = command.patientId();
         this.doctorId = command.doctorId();
         this.date = command.date();
     }
