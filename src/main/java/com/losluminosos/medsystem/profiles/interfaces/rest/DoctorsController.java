@@ -1,6 +1,8 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetDoctorByIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.DoctorCommandService;
+import com.losluminosos.medsystem.profiles.domain.services.DoctorQueryService;
 import com.losluminosos.medsystem.profiles.interfaces.rest.resources.CreateDoctorResource;
 import com.losluminosos.medsystem.profiles.interfaces.rest.resources.DoctorResource;
 import com.losluminosos.medsystem.profiles.interfaces.rest.transform.CreateDoctorCommandFromResourceAssembler;
@@ -9,18 +11,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/doctors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Doctors", description = "Doctor Management Endpoints")
 public class DoctorsController {
+    private final DoctorQueryService doctorQueryService;
     private final DoctorCommandService doctorCommandService;
 
-    public DoctorsController(DoctorCommandService doctorCommandService) {
+    public DoctorsController(DoctorQueryService doctorQueryService, DoctorCommandService doctorCommandService) {
+        this.doctorQueryService = doctorQueryService;
         this.doctorCommandService = doctorCommandService;
     }
 
@@ -32,5 +33,15 @@ public class DoctorsController {
         var doctorResource = DoctorResourceFromEntityAssembler.toResourceFromEntity(doctor.get());
         return new ResponseEntity<>(doctorResource, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DoctorResource> getDoctorById(@PathVariable Long id) {
+        var getDoctorByIdQuery = new GetDoctorByIdQuery(id);
+        var doctor = doctorQueryService.handle(getDoctorByIdQuery);
+        if (doctor.isEmpty())
+            return ResponseEntity.notFound().build();
+        var doctorResource = DoctorResourceFromEntityAssembler.toResourceFromEntity(doctor.get());
+        return ResponseEntity.ok(doctorResource);
     }
 }

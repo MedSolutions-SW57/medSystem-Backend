@@ -1,0 +1,23 @@
+package com.losluminosos.medsystem.profiles.application.internal.queryservices;
+
+import com.losluminosos.medsystem.profiles.domain.model.aggregates.Patient;
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetPatientByIdQuery;
+import com.losluminosos.medsystem.profiles.domain.services.PatientQueryService;
+import com.losluminosos.medsystem.profiles.infrastructure.persistence.jpa.repositories.PatientRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class PatientQueryServiceImpl implements PatientQueryService {
+    private final PatientRepository patientRepository;
+
+    public PatientQueryServiceImpl(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
+    }
+
+    @Override
+    public Optional<Patient> handle(GetPatientByIdQuery query) {
+        return patientRepository.findById(query.id());
+    }
+}
