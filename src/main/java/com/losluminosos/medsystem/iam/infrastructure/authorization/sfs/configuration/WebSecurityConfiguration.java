@@ -63,8 +63,8 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // CORS default configuration
-        http.cors(configurer -> configurer.configurationSource( _ -> {
-            var cors = new CorsConfiguration();
+        CorsConfiguration cors = new CorsConfiguration();
+        http.cors(configurer -> configurer.configurationSource( request -> {
             cors.setAllowedOrigins(List.of("*"));
             cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
             cors.setAllowedHeaders(List.of("*"));
