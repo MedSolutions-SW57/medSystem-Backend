@@ -5,8 +5,6 @@ import com.losluminosos.medsystem.profiles.domain.model.valueobjects.EmailAddres
 import com.losluminosos.medsystem.profiles.domain.model.valueobjects.PersonName;
 import com.losluminosos.medsystem.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Getter
@@ -15,7 +13,6 @@ public class Doctor extends AuditableAbstractAggregateRoot<Doctor> {
 
     private String specialty;
 
-    @Size(max = 7)
     private String licenseNumber;
 
     private Long userId;
@@ -28,7 +25,6 @@ public class Doctor extends AuditableAbstractAggregateRoot<Doctor> {
             @AttributeOverride(name = "address", column = @Column(name = "email_address"))})
     private EmailAddress email;
 
-    @Size(max = 9)
     private String phone;
 
     public Doctor(){}

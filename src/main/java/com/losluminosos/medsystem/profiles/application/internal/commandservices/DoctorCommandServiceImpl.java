@@ -19,7 +19,6 @@ public class DoctorCommandServiceImpl implements DoctorCommandService {
 
     @Override
     public Optional<Doctor> handle(CreateDoctorCommand command) {
-        var emailAddress = new EmailAddress(command.email());
         var doctor = new Doctor(command);
         doctorRepository.save(doctor);
         return Optional.of(doctor);
