@@ -23,8 +23,8 @@ public class OpenApiConfiguration {
                         .license(new License().name("Apache 2.0")
                                 .url("https://www.apache.org/licenses/LICENSE-2.0.html")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("ACME Learning Platform Wiki Documentation")
-                        .url("https://acme-learning-platform.wiki.github.io/docs"));
+                        .description("MedSystem Wiki Documentation")
+                        .url("https://losluminosos-sw57.github.io/LandingPageMedSystem/"));
 
 
         final String securitySchemeName = "bearerAuth";

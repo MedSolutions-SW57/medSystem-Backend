@@ -23,9 +23,6 @@ public class AnalysisCommandServiceImpl implements AnalysisCommandService {
 
     @Override
     public Optional<Analysis> handle(CreateAnalysisCommand command){
-        if (analysisRepository.existsBySampleId(command.SampleId())) {
-            throw new IllegalArgumentException("Analysis with sample id " + command.SampleId() + " already exists");
-        }
         Optional<AnalysisStatus> analysisStatusOptional = analysisStatusRepository.findById(command.Status());
         if (analysisStatusOptional.isEmpty()) {
             throw new IllegalArgumentException("No AnalysisStatus found with id " + command.Status());

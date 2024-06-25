@@ -4,5 +4,5 @@ import com.losluminosos.medsystem.laboratoryservice.domain.model.aggregates.Anal
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnalysisRepository extends JpaRepository<Analysis, Long> {
-    boolean existsBySampleId(String sampleId);
+
 }
