@@ -4,6 +4,7 @@ import com.losluminosos.medsystem.appointments.domain.model.aggregates.Appointme
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByDoctorIdQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsByPatientIdQuery;
 import com.losluminosos.medsystem.appointments.domain.model.queries.GetAllAppointmentsQuery;
+import com.losluminosos.medsystem.appointments.domain.model.queries.GetAppointmentByIdQuery;
 import com.losluminosos.medsystem.appointments.domain.services.AppointmentQueryService;
 import com.losluminosos.medsystem.appointments.infrastructure.persistance.jpa.repositories.AppointmentRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class AppointmentQueryServiceImpl implements AppointmentQueryService{
     @Override
     public List<Appointment> handle(GetAllAppointmentsByPatientIdQuery query){
         return appointmentRepository.findAllByPatientId(query.patientId());
+    }
+
+    @Override
+    public Optional<Appointment> handle(GetAppointmentByIdQuery query) {
+        return appointmentRepository.findById(query.id());
     }
 
     @Override
