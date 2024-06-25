@@ -1,5 +1,6 @@
 package com.losluminosos.medsystem.laboratoryservice.interfaces.rest;
 
+import com.losluminosos.medsystem.laboratoryservice.domain.model.commands.DeleteSampleCommand;
 import com.losluminosos.medsystem.laboratoryservice.domain.model.queries.GetAllSamplesQuery;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleCommandService;
 import com.losluminosos.medsystem.laboratoryservice.domain.services.SampleQueryService;
@@ -42,5 +43,12 @@ public class SamplesController {
         var samples = sampleQueryService.handle(getAllSamplesQuery);
         var sampleResource = samples.stream().map(SampleResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(sampleResource);
+    }
+
+    @DeleteMapping("/{code}")
+    public ResponseEntity<?> deleteSample(@PathVariable String code) {
+        var deleteSampleCommand = new DeleteSampleCommand(code);
+        sampleCommandService.handle(deleteSampleCommand);
+        return ResponseEntity.ok("Code already exists");
     }
 }
