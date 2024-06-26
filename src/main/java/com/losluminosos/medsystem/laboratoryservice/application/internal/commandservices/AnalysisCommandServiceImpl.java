@@ -23,11 +23,11 @@ public class AnalysisCommandServiceImpl implements AnalysisCommandService {
 
     @Override
     public Optional<Analysis> handle(CreateAnalysisCommand command){
-        Optional<AnalysisStatus> analysisStatusOptional = analysisStatusRepository.findById(command.Status());
+        Optional<AnalysisStatus> analysisStatusOptional = analysisStatusRepository.findById(command.status());
         if (analysisStatusOptional.isEmpty()) {
-            throw new IllegalArgumentException("No AnalysisStatus found with id " + command.Status());
+            throw new IllegalArgumentException("No AnalysisStatus found with id " + command.status());
         }
-        var analysis = new Analysis(command.AnalysisType(), command.SampleId(), command.PatientDni(), command.Date(), analysisStatusOptional.get());
+        var analysis = new Analysis(command.analysisType(), command.sampleId(), command.patientId(), command.date(), analysisStatusOptional.get());
         analysisRepository.save(analysis);
         return Optional.of(analysis);
     }
