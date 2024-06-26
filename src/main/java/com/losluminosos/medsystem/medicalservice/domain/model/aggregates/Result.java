@@ -30,7 +30,7 @@ public class Result extends AuditableAbstractAggregateRoot<Result> {
         this.patientId = command.patientId();
         this.typeOfExam = command.typeOfExam();
         this.resultDateTime = command.resultDateTime();
-        this.result = result;
+        this.result = command.result();
     }
 
     public Result() {
