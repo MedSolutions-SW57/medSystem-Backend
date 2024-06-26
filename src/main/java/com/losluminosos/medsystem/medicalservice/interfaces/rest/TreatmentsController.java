@@ -47,7 +47,7 @@ public class TreatmentsController {
         return ResponseEntity.ok(treatmentResources);
     }
 
-    @GetMapping("/{patientId}")
+    @GetMapping("patientId/{patientId}")
     public ResponseEntity<TreatmentResource> getTreatmentByPatientId(@PathVariable Long patientId){
         var getTreatmentByPatientIdQuery = new GetTreatmentByPatientIdQuery(patientId);
         var treatment = treatmentQueryService.handle(getTreatmentByPatientIdQuery);
