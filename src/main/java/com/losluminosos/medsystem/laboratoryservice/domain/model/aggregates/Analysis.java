@@ -19,7 +19,7 @@ public class Analysis extends AuditableAbstractAggregateRoot<Analysis>{
     private String sampleId;
 
     @NotBlank(message = "Patient dni cannot be empty")
-    private String patientDni;
+    private Long patientId;
 
     @NotBlank(message = "Date cannot be empty")
     private String Date;
@@ -31,11 +31,11 @@ public class Analysis extends AuditableAbstractAggregateRoot<Analysis>{
 
     public Analysis() {}
 
-    public Analysis(String analysisType, String sampleId, String patientDni, String Date, AnalysisStatus status) {
+    public Analysis(String analysisType, String sampleId, Long patientId, String Date, AnalysisStatus status) {
         this();
         this.analysisType = analysisType;
         this.sampleId = sampleId;
-        this.patientDni = patientDni;
+        this.patientId = patientId;
         this.Date = Date;
         this.status = status;
     }

@@ -4,7 +4,7 @@ public record AnalysisResource(
         Long id,
         String analysisType,
         String sampleId,
-        String patientDni,
+        Long patientId,
         String date,
         Long statusId
 ) {

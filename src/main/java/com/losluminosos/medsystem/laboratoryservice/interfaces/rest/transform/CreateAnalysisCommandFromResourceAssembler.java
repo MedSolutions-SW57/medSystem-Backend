@@ -8,7 +8,7 @@ public class CreateAnalysisCommandFromResourceAssembler {
         return new CreateAnalysisCommand(
                 resource.analysisType(),
                 resource.sampleId(),
-                resource.patientDni(),
+                resource.patientId(),
                 resource.date(),
                 resource.status()
         );
