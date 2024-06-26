@@ -57,9 +57,9 @@ public class TreatmentsController {
         return ResponseEntity.ok(treatmentResource);
     }
 
-    @DeleteMapping("/{treatmentId}")
-    public ResponseEntity<?> deleteTreatment(@PathVariable Long treatmentId){
-        var deleteTreatmentCommand = new DeleteTreatmentCommand(treatmentId);
+    @DeleteMapping("treatmentName/{treatmentName}")
+    public ResponseEntity<?> deleteTreatment(@PathVariable String treatmentName){
+        var deleteTreatmentCommand = new DeleteTreatmentCommand(treatmentName);
         treatmentCommandService.handle(deleteTreatmentCommand);
         return ResponseEntity.ok("Treatment with given id successfully deleted");
     }

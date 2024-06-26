@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.medicalservice.interfaces.rest.resources.Repor
 
 public class ReportResourceFromEntityAssembler {
     public static ReportResource toResourceFromEntity(Report entity){
-        return new ReportResource(entity.getId(), entity.getReason(), entity.getDate(), entity.getPatientId(), entity.getDoctorName());
+        return new ReportResource(entity.getId(), entity.getReason(), entity.getDate(), entity.getPatientId());
     }
 }

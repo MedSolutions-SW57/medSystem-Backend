@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.medicalservice.interfaces.rest.resources.Creat
 
 public class CreateReportCommandFromResourceAssembler {
     public static CreateReportCommand toCommandFromResource(CreateReportResource resource) {
-        return new CreateReportCommand(resource.reason(), resource.date(), resource.patientId(),resource.doctorName());
+        return new CreateReportCommand(resource.reason(), resource.date(), resource.patientId());
     }
 }

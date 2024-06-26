@@ -29,7 +29,7 @@ public class TreatmentCommandServiceImpl implements TreatmentCommandService {
 
     @Override
     public void handle(DeleteTreatmentCommand command) {
-        var treatment=treatmentRepository.findById(command.treatmentId());
+        var treatment=treatmentRepository.findByTreatmentName(command.treatmentId());
         treatment.ifPresent(treatmentRepository::delete);
     }
 }
