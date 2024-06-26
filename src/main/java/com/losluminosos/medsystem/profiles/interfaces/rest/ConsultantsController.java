@@ -1,5 +1,6 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetAllConsultantsQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetConsultantByIdQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetConsultantByUserIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.ConsultantCommandService;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/consultants", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,6 +37,14 @@ public class ConsultantsController {
         var consultantResource = ConsultantResourceFromEntityAssembler.toResourceFromEntity(consultant.get());
         return new ResponseEntity<>(consultantResource, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ConsultantResource>> getAllConsultants(){
+        var getAllConsultantsQuery = new GetAllConsultantsQuery();
+        var consultants = consultantQueryService.handle(getAllConsultantsQuery);
+        var consultantResources = consultants.stream().map(ConsultantResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(consultantResources);
     }
 
     @GetMapping("/{id}")

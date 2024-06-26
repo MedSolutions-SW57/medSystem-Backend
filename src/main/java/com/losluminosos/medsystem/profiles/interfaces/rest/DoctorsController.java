@@ -1,5 +1,6 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetAllDoctorsQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetDoctorByIdQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetDoctorByUserIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.DoctorCommandService;
@@ -8,11 +9,14 @@ import com.losluminosos.medsystem.profiles.interfaces.rest.resources.CreateDocto
 import com.losluminosos.medsystem.profiles.interfaces.rest.resources.DoctorResource;
 import com.losluminosos.medsystem.profiles.interfaces.rest.transform.CreateDoctorCommandFromResourceAssembler;
 import com.losluminosos.medsystem.profiles.interfaces.rest.transform.DoctorResourceFromEntityAssembler;
+import io.swagger.v3.core.util.ApiResponsesDeserializer;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/doctors", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,6 +38,14 @@ public class DoctorsController {
         var doctorResource = DoctorResourceFromEntityAssembler.toResourceFromEntity(doctor.get());
         return new ResponseEntity<>(doctorResource, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DoctorResource>> getAllDoctors(){
+        var getAllDoctorsQuery = new GetAllDoctorsQuery();
+        var doctors = doctorQueryService.handle(getAllDoctorsQuery);
+        var doctorResources = doctors.stream().map(DoctorResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(doctorResources);
     }
 
     @GetMapping("/{id}")

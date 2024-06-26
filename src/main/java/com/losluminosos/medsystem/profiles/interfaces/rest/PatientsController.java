@@ -1,5 +1,6 @@
 package com.losluminosos.medsystem.profiles.interfaces.rest;
 
+import com.losluminosos.medsystem.profiles.domain.model.queries.GetAllPatientsQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetPatientByIdQuery;
 import com.losluminosos.medsystem.profiles.domain.model.queries.GetPatientByUserIdQuery;
 import com.losluminosos.medsystem.profiles.domain.services.PatientCommandService;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/patients", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,6 +36,14 @@ public class PatientsController {
         if (patient.isEmpty()) return ResponseEntity.badRequest().build();
         var patientResource = PatientResourceFromEntityAssembler.toResourceFromEntity(patient.get());
         return new ResponseEntity<>(patientResource, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PatientResource>> getAllPatients(){
+        var getAllPatientsQuery = new GetAllPatientsQuery();
+        var patients = patientQueryService.handle(getAllPatientsQuery);
+        var patientResources = patients.stream().map(PatientResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(patientResources);
     }
 
     @GetMapping("/{id}")
