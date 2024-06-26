@@ -5,6 +5,6 @@ public record CreateAnalysisResource(
         String sampleId,
         Long patientId,
         String date,
-        Long status
+        String status
 ) {
 }

@@ -11,6 +11,6 @@ public class AnalysisResourceFromEntityAssembler {
             entity.getSampleId(),
             entity.getPatientId(),
             entity.getDate(),
-            entity.getStatus().getId());
+            entity.getStatus().getStringName());
     }
 }

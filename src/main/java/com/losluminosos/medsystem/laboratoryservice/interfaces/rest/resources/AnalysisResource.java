@@ -6,6 +6,6 @@ public record AnalysisResource(
         String sampleId,
         Long patientId,
         String date,
-        Long statusId
+        String status
 ) {
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface AnalysisStatusRepository extends JpaRepository<AnalysisStatus, Long> {
     Optional<AnalysisStatus> findById(Long id);
     boolean existsByStatus(Status status);
+    Optional<AnalysisStatus> findByStatus(Status status);
 }

@@ -23,6 +23,8 @@ public class Role {
     public Role(Roles name) {
         this.name = name;
     }
+
+
     public Roles getName() {
         return name;
     }

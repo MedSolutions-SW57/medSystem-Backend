@@ -27,9 +27,9 @@ public class ApplicationReadyEventHandlerAnalysisStatus {
     @EventListener
     public void on(ApplicationReadyEvent event){
         var applicationName = event.getApplicationContext().getId();
-        LOGGER.info("Starting to verify if analysis statusId seeding is needed for {} at {}", applicationName, getCurrentTimestamp());
+        LOGGER.info("Starting to verify if analysis status seeding is needed for {} at {}", applicationName, getCurrentTimestamp());
         var seedAnalysisStatusCommand = new SeedAnalysisStatusCommand();
         analysisStatusCommandService.handle(seedAnalysisStatusCommand);
-        LOGGER.info("Analysis statusId seeding verification finished for {} at {}", applicationName, getCurrentTimestamp());
+        LOGGER.info("Analysis status seeding verification finished for {} at {}", applicationName, getCurrentTimestamp());
     }
 }

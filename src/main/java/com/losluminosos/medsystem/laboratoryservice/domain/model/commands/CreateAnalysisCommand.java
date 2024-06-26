@@ -1,4 +1,6 @@
 package com.losluminosos.medsystem.laboratoryservice.domain.model.commands;
 
-public record CreateAnalysisCommand(String analysisType,String sampleId, Long patientId, String date, Long status) {
+import com.losluminosos.medsystem.laboratoryservice.domain.model.entities.AnalysisStatus;
+
+public record CreateAnalysisCommand(String analysisType, String sampleId, Long patientId, String date, AnalysisStatus status) {
 }

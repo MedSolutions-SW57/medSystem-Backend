@@ -23,11 +23,9 @@ public class AnalysisCommandServiceImpl implements AnalysisCommandService {
 
     @Override
     public Optional<Analysis> handle(CreateAnalysisCommand command){
-        Optional<AnalysisStatus> analysisStatusOptional = analysisStatusRepository.findById(command.status());
-        if (analysisStatusOptional.isEmpty()) {
-            throw new IllegalArgumentException("No AnalysisStatus found with id " + command.status());
-        }
-        var analysis = new Analysis(command.analysisType(), command.sampleId(), command.patientId(), command.date(), analysisStatusOptional.get());
+        if(!analysisStatusRepository.existsByStatus(command.status().getStatus()))
+            throw new IllegalArgumentException("Status doesnt exists");
+        var analysis = new Analysis(command.analysisType(), command.sampleId(), command.patientId(), command.date(), analysisStatusRepository.findByStatus(command.status().getStatus()).get());
         analysisRepository.save(analysis);
         return Optional.of(analysis);
     }

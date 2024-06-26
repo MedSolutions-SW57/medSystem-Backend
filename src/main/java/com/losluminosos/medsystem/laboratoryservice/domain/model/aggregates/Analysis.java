@@ -1,7 +1,6 @@
 package com.losluminosos.medsystem.laboratoryservice.domain.model.aggregates;
 
 import com.losluminosos.medsystem.laboratoryservice.domain.model.entities.AnalysisStatus;
-import com.losluminosos.medsystem.laboratoryservice.domain.model.valueobjects.Status;
 import com.losluminosos.medsystem.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -18,7 +17,7 @@ public class Analysis extends AuditableAbstractAggregateRoot<Analysis>{
     @NotBlank(message = "Sample id cannot be empty")
     private String sampleId;
 
-    @NotBlank(message = "Patient dni cannot be empty")
+    @NotNull(message = "Patient dni cannot be empty")
     private Long patientId;
 
     @NotBlank(message = "Date cannot be empty")
@@ -26,7 +25,6 @@ public class Analysis extends AuditableAbstractAggregateRoot<Analysis>{
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status_id")
-    @NotNull(message = "Status cannot be empty")
     private AnalysisStatus status;
 
     public Analysis() {}
