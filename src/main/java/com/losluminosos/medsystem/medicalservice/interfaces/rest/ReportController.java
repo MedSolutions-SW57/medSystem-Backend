@@ -51,7 +51,7 @@ public class ReportController {
     }
 
     @GetMapping("patient/{patientId}")
-    public ResponseEntity<List<ReportResource>> getAllReportsByPatientId(@PathVariable String patientId) {
+    public ResponseEntity<List<ReportResource>> getAllReportsByPatientId(@PathVariable Long patientId) {
         var getReportsByPatientIdQuery = new GetReportsByPatientIdQuery(patientId);
         List<Report> reports = reportQueryService.handle(getReportsByPatientIdQuery);
         if (reports.isEmpty()) return ResponseEntity.notFound().build();

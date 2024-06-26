@@ -22,19 +22,14 @@ public class Report extends AuditableAbstractAggregateRoot<Report> {
 
     @Column(name = "patient_id", nullable = false, updatable = false)
     @Getter
-    private String patientId;
-
-    @Column(name = "doctor_name", nullable = false, updatable = false)
-    @Getter
-    private String doctorName;
+    private Long patientId;
 
     protected Report() {}
 
-    public Report(String reason, String date, String patientId, String doctorName) {
+    public Report(String reason, String date, Long patientId) {
         this.reason = reason;
         this.date = date;
         this.patientId = patientId;
-        this.doctorName = doctorName;
     }
 
     public Report(CreateReportCommand command) {
@@ -42,7 +37,6 @@ public class Report extends AuditableAbstractAggregateRoot<Report> {
         this.reason = command.reason();
         this.date = command.date();
         this.patientId = command.patientId();
-        this.doctorName = command.doctorName();
     }
 
 }
