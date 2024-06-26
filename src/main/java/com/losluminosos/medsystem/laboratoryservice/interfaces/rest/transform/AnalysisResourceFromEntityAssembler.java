@@ -9,7 +9,7 @@ public class AnalysisResourceFromEntityAssembler {
             entity.getId(),
             entity.getAnalysisType(),
             entity.getSampleId(),
-            entity.getPatientDni(),
+            entity.getPatientId(),
             entity.getDate(),
             entity.getStatus().getId());
     }
