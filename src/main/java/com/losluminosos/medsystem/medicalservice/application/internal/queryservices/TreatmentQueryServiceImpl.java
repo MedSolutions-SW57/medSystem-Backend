@@ -25,7 +25,7 @@ public class TreatmentQueryServiceImpl implements TreatmentQueryService {
     }
 
     @Override
-    public Optional<Treatment> handle(GetTreatmentByPatientIdQuery query) {
-        return treatmentRepository.findByPatientId(query.patientId());
+    public List<Treatment> handle(GetTreatmentByPatientIdQuery query) {
+        return treatmentRepository.findAllByPatientId(query.patientId());
     }
 }

@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface TreatmentQueryService {
     List<Treatment> handle(GetAllTreatmentsQuery query);
-    Optional<Treatment> handle(GetTreatmentByPatientIdQuery query);
+    List<Treatment> handle(GetTreatmentByPatientIdQuery query);
 }

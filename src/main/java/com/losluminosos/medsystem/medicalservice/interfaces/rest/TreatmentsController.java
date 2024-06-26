@@ -48,13 +48,11 @@ public class TreatmentsController {
     }
 
     @GetMapping("patientId/{patientId}")
-    public ResponseEntity<TreatmentResource> getTreatmentByPatientId(@PathVariable Long patientId){
-        var getTreatmentByPatientIdQuery = new GetTreatmentByPatientIdQuery(patientId);
-        var treatment = treatmentQueryService.handle(getTreatmentByPatientIdQuery);
-        if (treatment.isEmpty())
-            return ResponseEntity.notFound().build();
-        var treatmentResource = TreatmentResourceFromEntityAssembler.toResourceFromEntity(treatment.get());
-        return ResponseEntity.ok(treatmentResource);
+    public ResponseEntity<List<TreatmentResource>> getAllTreatmentsByPatientId(@PathVariable Long patientId){
+        var getAllTreatmentByPatientIdQuery = new GetTreatmentByPatientIdQuery(patientId);
+        var treatments = treatmentQueryService.handle(getAllTreatmentByPatientIdQuery);
+        var treatmentResources = treatments.stream().map(TreatmentResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(treatmentResources);
     }
 
     @DeleteMapping("treatmentName/{treatmentName}")
