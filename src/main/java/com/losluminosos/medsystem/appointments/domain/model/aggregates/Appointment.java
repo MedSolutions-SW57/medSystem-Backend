@@ -15,7 +15,7 @@ public class Appointment extends AuditableAbstractAggregateRoot<Appointment> {
 
     private Long patientId;
 
-    private Date date;
+    private String date;
 
     private String reason;
 

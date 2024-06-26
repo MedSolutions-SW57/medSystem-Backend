@@ -5,6 +5,6 @@ import java.util.Date;
 public record CreateAppointmentResource(
         Long doctorId,
         Long patientId,
-        Date date,
+        String date,
         String reason
 ){ }

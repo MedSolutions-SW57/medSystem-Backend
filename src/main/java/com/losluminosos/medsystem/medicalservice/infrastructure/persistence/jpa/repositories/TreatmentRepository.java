@@ -4,7 +4,10 @@ import com.losluminosos.medsystem.medicalservice.domain.model.aggregates.Treatme
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface TreatmentRepository extends JpaRepository<Treatment, Long> {
-    boolean existsByTreatmentNameAndPatientId(String treatmentName, String patientId);
+    boolean existsByTreatmentNameAndPatientId(String treatmentName, Long patientId);
+    Optional<Treatment> findByPatientId(Long patientId);
 }

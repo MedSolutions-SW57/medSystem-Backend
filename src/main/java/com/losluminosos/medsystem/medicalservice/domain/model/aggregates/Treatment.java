@@ -18,7 +18,7 @@ public class Treatment extends AuditableAbstractAggregateRoot<Treatment> {
     private String description;
     @Getter
     @Column(name = "patient_id")
-    private String patientId;
+    private Long patientId;
 
     @Embedded
     @AttributeOverrides({
