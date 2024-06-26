@@ -16,12 +16,12 @@ public class ResultQueryServiceImpl implements ResultQueryService {
     }
 
     @Override
-    public List<Result> getByDoctorId(String doctorId) {
+    public List<Result> getByDoctorId(Long doctorId) {
         return resultRepository.findByDoctorId(doctorId);
     }
 
     @Override
-    public List<Result> getByPatientId(String patientId) {
+    public List<Result> getByPatientId(Long patientId) {
         return resultRepository.findByPatientId(patientId);
     }
 }

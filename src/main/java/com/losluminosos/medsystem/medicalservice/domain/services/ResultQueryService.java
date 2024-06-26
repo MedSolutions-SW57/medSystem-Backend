@@ -5,6 +5,6 @@ import com.losluminosos.medsystem.medicalservice.domain.model.aggregates.Result;
 import java.util.List;
 
 public interface ResultQueryService {
-    List<Result> getByDoctorId(String doctorId);
-    List<Result> getByPatientId(String patientId);
+    List<Result> getByDoctorId(Long doctorId);
+    List<Result> getByPatientId(Long patientId);
 }
